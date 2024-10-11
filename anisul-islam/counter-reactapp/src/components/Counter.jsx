@@ -1,13 +1,31 @@
-const Counter = () => {
-  const increment = () => {};
+import { useDispatch, useSelector } from "react-redux";
+import {
+  decrementCounter,
+  incrementCounter,
+  resetCounter,
+} from "../services/actions/counterAction";
 
-  const decrement = () => {};
+const Counter = () => {
+  const count = useSelector((state) => state.count);
+  const dispatch = useDispatch();
+  const increment = () => {
+    dispatch(incrementCounter());
+  };
+
+  const decrement = () => {
+    dispatch(decrementCounter());
+  };
+
+  const reset = () => {
+    dispatch(resetCounter());
+  };
   return (
     <div>
       <h2>Counter App</h2>
-      <h3>Count: 0</h3>
+      <h3>Count: {count}</h3>
       <button onClick={increment}>Increment</button>
       <button onClick={decrement}>Decrement</button>
+      <button onClick={reset}>Reset</button>
     </div>
   );
 };
@@ -23,5 +41,7 @@ export default Counter;
 // dispatch - increment, decrement, reset
 
 // store - reducer
+
+// providing store to main.jsx
 
 // react-redux, redux-toolkit, redux-thunk
