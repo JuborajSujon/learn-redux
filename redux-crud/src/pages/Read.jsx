@@ -1,9 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { showUser } from "../features/userDetails/userDetailSlice";
+import CustomModal from "../components/CustomModal";
 
 const Read = () => {
   const dispatch = useDispatch();
+
+  const [id, setId] = useState();
+
+  const [showModal, setShowModal] = useState(false);
 
   const { isLoading, error, users } = useSelector((state) => state.app);
 
@@ -24,13 +29,20 @@ const Read = () => {
       <h2 className="text-4xl mt-4 text-center font-bold mb-3">
         Users Details
       </h2>
+      {showModal && (
+        <CustomModal
+          id={id}
+          setShowModal={setShowModal}
+          showModal={showModal}
+        />
+      )}
       {error && <p className="text-red-500">{error}</p>}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3  items-center justify-items-center">
         {users &&
-          users.map((user, index) => {
+          users.map((user) => {
             return (
               <div
-                key={index}
+                key={user.id}
                 className="card bg-base-100 w-full shadow-xl px-4">
                 <div className="card-body">
                   <h2 className="text-lg">
@@ -40,7 +52,9 @@ const Read = () => {
                   <p>Email: {user.email}</p>
                   <p>Gender: {user.gender}</p>
                   <div className="card-actions justify-center">
-                    <button className="btn btn-info min-h-8 h-8 sm:min-h-10 sm:h-10">
+                    <button
+                      onClick={() => [setId(user.id), setShowModal(true)]}
+                      className="btn btn-info min-h-8 h-8 sm:min-h-10 sm:h-10">
                       view
                     </button>
                     <button className="btn btn-secondary min-h-8 h-8 sm:min-h-10 sm:h-10">

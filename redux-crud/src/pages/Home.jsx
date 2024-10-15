@@ -1,13 +1,8 @@
 import useScrollPosition from "./../hook/useScrollPosition";
-import Create from "./Create";
 
 const Home = () => {
   useScrollPosition();
-  return (
-    <div className="">
-      <Create />
-    </div>
-  );
+  return <div className="hero min-h-screen bg-green-50">This is Home Page</div>;
 };
 
 export default Home;
