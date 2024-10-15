@@ -1,8 +1,13 @@
 import useScrollPosition from "./../hook/useScrollPosition";
+import Create from "./Create";
 
 const Home = () => {
   useScrollPosition();
-  return <div>This Main Page</div>;
+  return (
+    <div className="">
+      <Create />
+    </div>
+  );
 };
 
 export default Home;

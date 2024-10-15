@@ -18,7 +18,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/all-post"
+          to="/all-user"
           className={({ isActive, isPending }) =>
             isPending
               ? "pending"
@@ -31,7 +31,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/create-post"
+          to="/create-user"
           className={({ isActive, isPending }) =>
             isPending
               ? "pending"

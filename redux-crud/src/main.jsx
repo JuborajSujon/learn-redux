@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
+import Create from "./pages/Create";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,16 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+
+      {
+        path: "/all-user",
+        element: <Home />,
+      },
+
+      {
+        path: "/create-user",
+        element: <Create />,
       },
     ],
   },
