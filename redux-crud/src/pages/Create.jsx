@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUser } from "../features/userDetails/userDetailSlice";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const [users, setUsers] = useState({});
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -13,8 +16,8 @@ const Create = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("users", users);
     dispatch(createUser(users));
+    navigate("/all-user");
   };
 
   return (

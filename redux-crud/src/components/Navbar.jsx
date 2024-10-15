@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  const count = useSelector((state) => state.app?.users.length);
   const navList = (
     <>
       <li className="">
@@ -26,7 +28,7 @@ const Navbar = () => {
               ? "text-slate-900 dark:text-green-400 border-b-4 border-green-400 hover:border-slate-300"
               : "hover:text-slate-900 hover:bg-green-400 dark:text-green-400 dark:hover:text-slate-900"
           }>
-          All Post
+          All Post ({count})
         </NavLink>
       </li>
       <li>
