@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
 import Create from "./pages/Create";
 import Read from "./pages/Read";
+import Update from "./pages/Update";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/create-user",
         element: <Create />,
+      },
+      {
+        path: "/update-user/:id",
+        element: <Update />,
       },
     ],
   },

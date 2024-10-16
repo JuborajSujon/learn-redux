@@ -1,8 +1,20 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { showUser } from "../features/userDetails/userDetailSlice";
 
 const Navbar = () => {
-  const count = useSelector((state) => state.app?.users.length);
+  const users = useSelector((state) => state.app?.users);
+  const count = users.length;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (users.length === 0) {
+      // Re-fetch only if users list is empty
+      dispatch(showUser());
+    }
+  }, [dispatch, users.length]);
   const navList = (
     <>
       <li className="">

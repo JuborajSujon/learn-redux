@@ -58,7 +58,9 @@ const Read = () => {
                       className="btn btn-info min-h-8 h-8 sm:min-h-10 sm:h-10">
                       view
                     </button>
-                    <Link className="btn btn-secondary min-h-8 h-8 sm:min-h-10 sm:h-10">
+                    <Link
+                      to={`/update-user/${user.id}`}
+                      className="btn btn-secondary min-h-8 h-8 sm:min-h-10 sm:h-10">
                       Edit
                     </Link>
                     <Link
