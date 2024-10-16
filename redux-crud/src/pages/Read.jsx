@@ -13,8 +13,6 @@ const Read = () => {
 
   const [radioValue, setRadioValue] = useState("All");
 
-  console.log(radioValue);
-
   const { isLoading, error, users, searchData } = useSelector(
     (state) => state.app
   );

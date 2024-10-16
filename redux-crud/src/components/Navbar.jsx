@@ -47,7 +47,7 @@ const Navbar = () => {
               ? "text-slate-900 dark:text-green-400 border-b-4 border-green-400 hover:border-slate-300"
               : "hover:text-slate-900 hover:bg-green-400 dark:text-green-400 dark:hover:text-slate-900"
           }>
-          All Post ({count})
+          All Users ({count})
         </NavLink>
       </li>
       <li>
@@ -60,7 +60,7 @@ const Navbar = () => {
               ? "text-slate-900 dark:text-green-400 border-b-4 border-green-400 hover:border-slate-300"
               : "hover:text-slate-900 hover:bg-green-400 dark:text-green-400 dark:hover:text-slate-900"
           }>
-          Create Post
+          Create User
         </NavLink>
       </li>
     </>
