@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { showUser } from "../features/userDetails/userDetailSlice";
+import { searchUser, showUser } from "../features/userDetails/userDetailSlice";
 
 const Navbar = () => {
+  const [search, setSearch] = useState("");
+
   const users = useSelector((state) => state.app?.users);
   const count = users.length;
 
@@ -15,6 +17,11 @@ const Navbar = () => {
       dispatch(showUser());
     }
   }, [dispatch, users.length]);
+
+  useEffect(() => {
+    dispatch(searchUser(search));
+  }, [dispatch, search]);
+
   const navList = (
     <>
       <li className="">
@@ -102,6 +109,7 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="Search here"
+            onChange={(e) => setSearch(e.target.value)}
             className="input input-bordered input-success w-full min-h-8 h-8 sm:min-h-10 sm:h-10 max-w-xs focus-visible:border-none"
           />
         </form>

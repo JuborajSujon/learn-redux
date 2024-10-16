@@ -11,7 +11,9 @@ const Read = () => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const { isLoading, error, users } = useSelector((state) => state.app);
+  const { isLoading, error, users, searchData } = useSelector(
+    (state) => state.app
+  );
 
   useEffect(() => {
     dispatch(showUser());
@@ -40,39 +42,50 @@ const Read = () => {
       {error && <p className="text-red-500">{error}</p>}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3  items-center justify-items-center">
         {users &&
-          users.map((user) => {
-            return (
-              <div
-                key={user.id}
-                className="card bg-base-100 w-full shadow-xl px-4">
-                <div className="card-body">
-                  <h2 className="text-lg">
-                    <span className="font-medium">Name:</span>
-                    {user.name}
-                  </h2>
-                  <p>Email: {user.email}</p>
-                  <p>Gender: {user.gender}</p>
-                  <div className="card-actions justify-center">
-                    <button
-                      onClick={() => [setId(user.id), setShowModal(true)]}
-                      className="btn btn-info min-h-8 h-8 sm:min-h-10 sm:h-10">
-                      view
-                    </button>
-                    <Link
-                      to={`/update-user/${user.id}`}
-                      className="btn btn-secondary min-h-8 h-8 sm:min-h-10 sm:h-10">
-                      Edit
-                    </Link>
-                    <Link
-                      onClick={() => dispatch(deleteUser(user.id))}
-                      className="btn btn-error min-h-8 h-8 sm:min-h-10 sm:h-10">
-                      Delete
-                    </Link>
+          users
+            .filter((user) => {
+              if (searchData === "") {
+                return user;
+              } else if (
+                user.name.toLowerCase().includes(searchData.toLowerCase())
+              ) {
+                return user;
+              }
+            })
+
+            .map((user) => {
+              return (
+                <div
+                  key={user.id}
+                  className="card bg-base-100 w-full shadow-xl px-4">
+                  <div className="card-body">
+                    <h2 className="text-lg">
+                      <span className="font-medium">Name:</span>
+                      {user.name}
+                    </h2>
+                    <p>Email: {user.email}</p>
+                    <p>Gender: {user.gender}</p>
+                    <div className="card-actions justify-center">
+                      <button
+                        onClick={() => [setId(user.id), setShowModal(true)]}
+                        className="btn btn-info min-h-8 h-8 sm:min-h-10 sm:h-10">
+                        view
+                      </button>
+                      <Link
+                        to={`/update-user/${user.id}`}
+                        className="btn btn-secondary min-h-8 h-8 sm:min-h-10 sm:h-10">
+                        Edit
+                      </Link>
+                      <Link
+                        onClick={() => dispatch(deleteUser(user.id))}
+                        className="btn btn-error min-h-8 h-8 sm:min-h-10 sm:h-10">
+                        Delete
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
       </div>
     </div>
   );

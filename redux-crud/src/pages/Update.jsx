@@ -37,6 +37,14 @@ const Update = () => {
     setUpdateData({ ...updateData, [e.target.name]: e.target.value });
   };
 
+  if (isLoading) {
+    return (
+      <div className="hero min-h-screen bg-green-50">
+        <h2 className="text-2xl font-bold text-center">Loading.....</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="hero min-h-screen bg-green-50">
       <form
