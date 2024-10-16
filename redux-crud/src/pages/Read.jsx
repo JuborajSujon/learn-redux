@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showUser } from "../features/userDetails/userDetailSlice";
+import { deleteUser, showUser } from "../features/userDetails/userDetailSlice";
 import CustomModal from "../components/CustomModal";
+import { Link } from "react-router-dom";
 
 const Read = () => {
   const dispatch = useDispatch();
@@ -57,12 +58,14 @@ const Read = () => {
                       className="btn btn-info min-h-8 h-8 sm:min-h-10 sm:h-10">
                       view
                     </button>
-                    <button className="btn btn-secondary min-h-8 h-8 sm:min-h-10 sm:h-10">
+                    <Link className="btn btn-secondary min-h-8 h-8 sm:min-h-10 sm:h-10">
                       Edit
-                    </button>
-                    <button className="btn btn-error min-h-8 h-8 sm:min-h-10 sm:h-10">
+                    </Link>
+                    <Link
+                      onClick={() => dispatch(deleteUser(user.id))}
+                      className="btn btn-error min-h-8 h-8 sm:min-h-10 sm:h-10">
                       Delete
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
