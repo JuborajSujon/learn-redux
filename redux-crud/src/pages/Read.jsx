@@ -11,6 +11,10 @@ const Read = () => {
 
   const [showModal, setShowModal] = useState(false);
 
+  const [radioValue, setRadioValue] = useState("All");
+
+  console.log(radioValue);
+
   const { isLoading, error, users, searchData } = useSelector(
     (state) => state.app
   );
@@ -28,8 +32,8 @@ const Read = () => {
   }
 
   return (
-    <div className="mt-20 min-h-screen bg-green-50 px-6">
-      <h2 className="text-4xl mt-4 text-center font-bold mb-3">
+    <div className="mt-16 min-h-screen bg-green-50 px-6">
+      <h2 className="text-4xl mt-4 pt-6 text-center font-bold mb-3">
         Users Details
       </h2>
       {showModal && (
@@ -40,6 +44,44 @@ const Read = () => {
         />
       )}
       {error && <p className="text-red-500">{error}</p>}
+      <div className="mb-6 flex flex-row gap-6 items-center justify-start">
+        <h2 className="text-xl font-bold">Filter by</h2>
+        <div className="form-control flex gap-3 flex-row items-center justify-start min-h-8 h-8 sm:min-h-10 sm:h-10">
+          <label className="flex items-center gap-2">
+            <input
+              onChange={(e) => setRadioValue(e.target.value)}
+              type="radio"
+              name="gender"
+              value="All"
+              checked={radioValue === "All"}
+              className="radio radio-success"
+            />
+            All
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              onChange={(e) => setRadioValue(e.target.value)}
+              type="radio"
+              name="gender"
+              value="Male"
+              checked={radioValue === "Male"}
+              className="radio radio-success"
+            />
+            Male
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              onChange={(e) => setRadioValue(e.target.value)}
+              type="radio"
+              name="gender"
+              value="Female"
+              checked={radioValue === "Female"}
+              className="radio radio-success"
+            />
+            Female
+          </label>
+        </div>
+      </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3  items-center justify-items-center">
         {users &&
           users
@@ -49,6 +91,17 @@ const Read = () => {
               } else if (
                 user.name.toLowerCase().includes(searchData.toLowerCase())
               ) {
+                return user;
+              }
+            })
+            .filter((user) => {
+              if (radioValue === "All") {
+                return user;
+              } else if (radioValue === "Male") {
+                return user.gender === "Male";
+              } else if (radioValue === "Female") {
+                return user.gender === "Female";
+              } else {
                 return user;
               }
             })
